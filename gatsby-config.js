@@ -18,5 +18,12 @@ module.exports = {
       "path": "./src/images/"
     },
     __key: "images"
-  }]
+  },
+  {
+    resolve: 'gatsby-plugin-apollo',
+    options: {
+      uri: 'http://localhost:4000/graphql'
+    }
+  }
+  ]
 };
