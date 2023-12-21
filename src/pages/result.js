@@ -9,7 +9,7 @@ const GET_DIAGNOSE_QUERY = gql`
 `;
 
 const ResultPage = (props) => {
-  const { loading, error, data } = useQuery(GET_DIAGNOSE_QUERY, { variables: props.location.state.variables } );
+  const { loading, error, data } = useQuery(GET_DIAGNOSE_QUERY, { variables: props.location.state?.variables } );
   if(!loading) {
     var splitData = data.getDiagnose.split(/(Diagnosis:|Indications for medication:|Contradictions:)/)
   }
