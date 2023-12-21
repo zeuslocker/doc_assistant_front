@@ -1,7 +1,8 @@
 import * as React from "react"
-import { mainWrapper, innerWrapper, fileInput, symptomsInput } from './index.module.css'
+import { fileInput, symptomsInput } from './index.module.css'
 import { Link } from "gatsby";
 import { useForm } from "react-hook-form"
+import Layout from "../components/layout"
 
 const IndexPage = () => {
   const { register, watch } = useForm();
@@ -17,8 +18,7 @@ const IndexPage = () => {
   }
 
   return (
-    <main className={`${mainWrapper} absolute inset-0 bottom-0 bg-bottom bg-no-repeat bg-slate-50 dark:bg-[#0B1120]`}>
-      <div className={`${innerWrapper} absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] dark:bg-bottom dark:border-b dark:border-slate-100/5`}></div>
+    <Layout>
       <div className="relative max-w-5xl mx-auto pt-20 sm:pt-24 lg:pt-32">
         <h1 className="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center dark:text-white">
           Enter your symptoms and get an instant diagnosis and treatment advice.
@@ -42,13 +42,15 @@ const IndexPage = () => {
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG, PDF, (max. 25mb).</p>
               </div>
             </div>
-            <Link to='/result' state={{ variables: variables }} className="bg-slate-900 mt-10 w-64 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400">
-              Get started
-            </Link>
+            <div className='flex space-x-3 justify-center'>
+              <Link to='/result' state={{ variables: variables }} className="bg-slate-900 w-64 mt-10 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg flex items-center justify-center dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400">
+                Get started
+              </Link>
+            </div>
           </form>
         </div>
       </div>
-    </main>
+    </Layout>
   )
 }
 
