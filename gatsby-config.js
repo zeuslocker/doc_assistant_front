@@ -22,7 +22,7 @@ module.exports = {
   {
     resolve: 'gatsby-plugin-apollo',
     options: {
-      uri: 'http://localhost:4000/graphql'
+      uri: 'https://doc-assistant-back.onrender.com/graphql'
     }
   }
   ]
