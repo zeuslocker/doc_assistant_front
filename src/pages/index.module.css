@@ -12,3 +12,8 @@
   width: 45rem;
   max-width: calc(100vw - 20px);
 }
+
+.errorText {
+  color: red;
+  font-weight: bold;
+}
