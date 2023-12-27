@@ -8,12 +8,14 @@ const maxFileSizeMb = 10
 
 const IndexPage = () => {
   const { register, handleSubmit, formState: { errors }, clearErrors, setError } = useForm();
-  const medicalTestsInput = register('medicalTests');
+  const medicalTestsInput = register('medicalTests', {validate: { lessThan10MB: (files) => null }});
   const medicalCardInput = register("medicalCard")
   const { ref: refSymptoms, ...symptomsInput } = register("symptoms", { required: true })
   const symptomsRef = React.useRef(null)
 
   const onSubmit = formData => {
+    const gg = errors
+    debugger
     let variables = {
       symptoms: formData.symptoms
     }
@@ -27,7 +29,7 @@ const IndexPage = () => {
   }
 
   const onChangeFile = (fieldName, event) => {
-    clearErrors(fieldName)
+    // clearErrors(fieldName)
     if (event.target.files[0]?.type === undefined) return;
     if (!['image/png', "image/jpeg", "application/pdf"].includes(event.target.files[0].type)) {
       setError(fieldName, {
@@ -70,13 +72,13 @@ const IndexPage = () => {
             <div className='flex space-x-3 justify-center'>
               <div>
                 <label className="block my-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Analyses (Optional)</label>
-                <input {...medicalTestsInput} onChange={(e) => { medicalTestsInput.onChange(e); onChangeFile('medicalTests', e)}} className={`${fileInput} block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help`} id="file_input" type="file" />
+                <input {...medicalTestsInput} onChange={(e) => { medicalTestsInput.onChange(e); onChangeFile('medicalTests', e) }} className={`${fileInput} block w-full hover:text-white text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help`} id="file_input" type="file" />
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG, PDF, (max. {maxFileSizeMb}mb).</p>
                 <p className={errorText}>{errors?.medicalTests?.message}</p>
               </div>
               <div>
                 <label className="block my-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Medical card (Optional)</label>
-                <input {...medicalCardInput} onChange={(e) => { medicalCardInput.onChange(e); onChangeFile('medicalCard', e) }} className={`${fileInput} block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help`} id="file_input" type="file" />
+                <input {...medicalCardInput} onChange={(e) => { medicalCardInput.onChange(e); onChangeFile('medicalCard', e) }} className={`${fileInput} block w-full hover:text-white text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help`} id="file_input" type="file" />
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG, PDF, (max. {maxFileSizeMb}mb).</p>
                 <p className={errorText}>{errors?.medicalCard?.message}</p>
               </div>
